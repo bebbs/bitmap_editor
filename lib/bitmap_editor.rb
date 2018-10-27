@@ -8,12 +8,13 @@ class BitmapEditor
 
     File.open(file).each do |line|
       line = line.chomp
-      case line
+      case line[0]
       when 'S'
         puts 'Shows the contents of the current image'
       when 'C'
         puts 'C - Clears the table, setting all pixels to white (O)'
       when 'I'
+        validate_command line
         puts 'I N M - Creates a new M x N image with all pixels coloured white (O)'
       when 'L'
         puts 'L X Y C - Colours the pixel (X,Y) with colour C'
@@ -25,5 +26,12 @@ class BitmapEditor
         raise InvalidCommandError, 'Command not recognised'
       end
     end
+  end
+
+  private
+
+  def validate_command command
+    args = command.split(' ').shift
+    raise InvalidCommandError, 'Invalid number of arguments' unless args.length == 2
   end
 end

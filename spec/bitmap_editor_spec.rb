@@ -14,4 +14,14 @@ describe BitmapEditor do
     let(:content) { 'bad_command' }
     it { expect { subject }.to raise_error('Command not recognised') }
   end
+
+  context 'receives I command with too few arguments' do
+    let(:content) { 'I 2' }
+    it { expect { subject }.to raise_error('Invalid number of arguments') }
+  end
+
+  context 'receives I command with too many arguments' do
+    let(:content) { 'I 1 2 4 5 7' }
+    it { expect{ subject }.to raise_error('Invalid number of arguments') }
+  end
 end
