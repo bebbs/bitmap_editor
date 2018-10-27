@@ -3,9 +3,8 @@ module Commands
   end
 
   class Base
-    def initialize(line, arg_count)
+    def initialize(line)
       @line = line
-      @arg_count = arg_count
     end
 
     def call
@@ -14,9 +13,12 @@ module Commands
 
     private
 
-    def validate
-      args = @line.split(' ').shift
-      raise InvalidCommandError, 'Invalid number of arguments' unless @line.length == @arg_count
+    def validate(arg_count:)
+      raise InvalidCommandError, 'Invalid number of arguments' unless arguments.length == arg_count
+    end
+
+    def arguments
+      @line.split(' ').shift
     end
   end
 end
