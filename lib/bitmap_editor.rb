@@ -1,5 +1,8 @@
 class BitmapEditor
 
+  class InvalidCommandError < StandardError
+  end
+
   def run(file)
     return puts 'please provide correct file' if file.nil? || !File.exists?(file)
 
@@ -19,7 +22,7 @@ class BitmapEditor
       when 'H'
         puts 'H X1 X2 Y C - Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive)'
       else
-        puts 'unrecognised command :('
+        raise InvalidCommandError, 'Command not recognised'
       end
     end
   end
