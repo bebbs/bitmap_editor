@@ -23,8 +23,8 @@ class BitmapEditor
       line = line.chomp
       command = line[0]
       if COMMANDS.has_key? command
-        cmd = COMMANDS[command].new line
-        cmd.call
+        cmd = COMMANDS[command].new line, @canvas
+        @canvas = cmd.call
       else
         raise Commands::InvalidCommandError, 'Command not recognised'
       end
