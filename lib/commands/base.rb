@@ -18,7 +18,7 @@ module Commands
     end
 
     def arguments
-      @line.split(' ').shift
+      @line.split(' ').drop(1)
     end
   end
 end
