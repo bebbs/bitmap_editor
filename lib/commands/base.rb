@@ -25,8 +25,13 @@ module Commands
       @line.split(' ').drop(1)
     end
 
-    def validate(arg_count:)
+    def recognised? instruction
+      @line[0] == instruction
+    end
+
+    def validate(arg_count:, instruction:)
       raise InvalidCommandError, 'Invalid number of arguments' unless arguments.length == arg_count
+      raise InvalidCommandError, 'Unrecognised command' unless recognised? instruction
     end
 
     def validate_integers *coords

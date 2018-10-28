@@ -15,6 +15,11 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
+    end
+
     it 'checks that canvas exists' do
       cmd = described_class.new('S', nil)
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
@@ -31,6 +36,11 @@ describe 'Commands' do
     it 'rejects too many arguments' do
       cmd = described_class.new('C 1', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
     end
 
     it 'checks that canvas exists' do
@@ -56,6 +66,11 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X 1 2', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
+    end
+
     it 'checks that coordinates are integers' do
       cmd = described_class.new('I A B', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
@@ -71,6 +86,11 @@ describe 'Commands' do
     it 'rejects too many arguments' do
       cmd = described_class.new('L 1 2 C A', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X 1 2 A', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
     end
 
     it 'checks that coordinates are integers' do
@@ -106,6 +126,11 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X 1 2 3 A', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
+    end
+
     it 'checks that coordinates are integers' do
       cmd = described_class.new('V X Y Z C', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
@@ -137,6 +162,11 @@ describe 'Commands' do
     it 'rejects too many arguments' do
       cmd = described_class.new('H 1 2 3 4 C A', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'rejects invalid instruction' do
+      cmd = described_class.new('X 1 2 3 A', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Unrecognised command')
     end
 
     it 'checks that coordinates are integers' do

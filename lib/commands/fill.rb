@@ -1,7 +1,7 @@
 module Commands
   class Fill < Base
     def validate
-      super(arg_count: 3)
+      super(arg_count: 3, instruction: 'L')
       validate_integers(*arguments[0..1])
       validate_colour(arguments[2])
       validate_canvas_exists

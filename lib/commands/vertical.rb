@@ -1,7 +1,7 @@
 module Commands
   class Vertical < Base
     def validate
-      super(arg_count: 4)
+      super(arg_count: 4, instruction: 'V')
       validate_integers(*arguments[0..2])
       validate_colour(arguments[3])
       validate_canvas_exists
