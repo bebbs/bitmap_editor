@@ -45,6 +45,9 @@ class Canvas
   end
 
   def fill_vertical(column, row_start, row_end, colour)
+    (row_start..row_end).each do |row|
+      fill_colour(row, column, colour)
+    end
   end
 
   private

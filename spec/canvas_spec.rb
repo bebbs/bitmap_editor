@@ -79,4 +79,13 @@ describe Canvas do
       expect { canvas.show }.to output("OO\nOO\n").to_stdout
     end
   end
+
+  context '#fill_vertical' do
+    let(:canvas) { Canvas.new(width: 2, height: 2) }
+
+    it 'fills a single column with a colour' do
+      canvas.fill_vertical(1, 1, 2, 'S')
+      expect(canvas.data).to eq [['S', 'O'], ['S', 'O']]
+    end
+  end
 end
