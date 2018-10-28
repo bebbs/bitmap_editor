@@ -20,11 +20,6 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
     end
 
-    it 'when canvas exists' do
-      cmd = Commands::Show.new('S', canvas)
-      expect { cmd.call }.not_to raise_error
-    end
-
     it 'send show command to canvas' do
       cmd = Commands::Show.new('S', canvas)
       cmd.call
@@ -41,11 +36,6 @@ describe 'Commands' do
     it 'when canvas does not exist' do
       cmd = Commands::Clear.new('C', nil)
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
-    end
-
-    it 'when canvas exists' do
-      cmd = Commands::Clear.new('C', canvas)
-      expect { cmd.call }.not_to raise_error
     end
 
     it 'sends clear command to canvas' do
@@ -121,11 +111,6 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
     end
 
-    it 'when canvas exists' do
-      cmd = Commands::Vertical.new('V 1 2 3 C', canvas)
-      expect { cmd.call }.not_to raise_error
-    end
-
     it 'sends vertical command to canvas' do
       cmd = Commands::Vertical.new('V 1 2 3 C', canvas)
       cmd.call
@@ -152,11 +137,6 @@ describe 'Commands' do
     it 'when canvas does not exist' do
       cmd = Commands::Horizontal.new('H 1 2 3 C', nil)
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
-    end
-
-    it 'when canvas exists' do
-      cmd = Commands::Horizontal.new('H 1 2 3 C', canvas)
-      expect { cmd.call }.not_to raise_error
     end
 
     it 'sends horizontal command to canvas' do
