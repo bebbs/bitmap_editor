@@ -36,6 +36,7 @@ class Canvas
   end
 
   def show
+    @data.each {|row| puts row.join }
   end
 
   def fill_colour(x, y, colour)

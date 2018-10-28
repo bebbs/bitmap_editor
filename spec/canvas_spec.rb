@@ -71,4 +71,12 @@ describe Canvas do
       expect(canvas.data).to eq [['O', 'O'], ['O', 'O']]
     end
   end
+
+  context '#show' do
+    let(:canvas) { Canvas.new(width: 2, height: 2) }
+
+    it 'renders contents of canvas' do
+      expect { canvas.show }.to output("OO\nOO\n").to_stdout
+    end
+  end
 end
