@@ -3,6 +3,7 @@ module Commands
     def validate
       super(arg_count: 3)
       validate_integers(*arguments[0..1])
+      validate_colour(arguments[2])
       validate_canvas_exists
     end
 

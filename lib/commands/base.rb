@@ -33,6 +33,10 @@ module Commands
         coords.each {|x| raise InvalidCommandError, 'Coordinates must be integers' unless x.is_i? }
     end
 
+    def validate_colour colour
+      raise InvalidCommandError, 'Must provide a valid colour' unless colour.is_letter?
+    end
+
     def validate_canvas_exists
       raise NilCanvasError, 'Command must be called after creating a canvas' if @canvas.nil?
     end

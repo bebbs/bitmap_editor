@@ -78,6 +78,11 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
 
+    it 'checks that colour is a letter' do
+      cmd = described_class.new('L 1 2 8', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Must provide a valid colour')
+    end
+
     it 'checks that canvas exists' do
       cmd = described_class.new('L 1 2 M', nil)
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
@@ -106,6 +111,11 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
 
+    it 'checks that colour is a letter' do
+      cmd = described_class.new('V 1 2 3 8', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Must provide a valid colour')
+    end
+
     it 'checks that canvas exists' do
       cmd = described_class.new('V 1 2 3 C', nil)
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
@@ -132,6 +142,11 @@ describe 'Commands' do
     it 'checks that coordinates are integers' do
       cmd = described_class.new('H X Y Z C', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
+    end
+
+    it 'checks that colour is a letter' do
+      cmd = described_class.new('H 1 2 3 8', nil)
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Must provide a valid colour')
     end
 
     it 'checks that canvas exists' do
