@@ -25,6 +25,11 @@ describe 'Commands' do
       cmd = Commands::Create.new('I 1 2 4 5 7')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
+
+    it 'coordinates must be integers' do
+      cmd = Commands::Create.new('I A B')
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
+    end
   end
 
   context 'validates fill' do
