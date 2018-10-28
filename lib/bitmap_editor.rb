@@ -1,3 +1,4 @@
+require 'canvas'
 require 'commands/base'
 require 'commands/show'
 require 'commands/clear'
@@ -7,6 +8,8 @@ require 'commands/vertical'
 require 'commands/horizontal'
 
 class BitmapEditor
+  attr_reader :canvas
+
   COMMANDS = {
     'S' => Commands::Show, 
     'C' => Commands::Clear, 
