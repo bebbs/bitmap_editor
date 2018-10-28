@@ -5,6 +5,7 @@ class Canvas
   class OutOfBoundsError < StandardError
   end
 
+  DEFAULT_COLOUR = 'O'
   DEFAULT_SIZE = 1
   MAXIMUM_SIZE = 250
 
@@ -18,7 +19,7 @@ class Canvas
   end
 
   def create_image
-    row = proc { Array.new(@width, "") }
+    row = proc { Array.new(@width, DEFAULT_COLOUR) }
     @data = Array.new(@height) { row.call }
   end
 

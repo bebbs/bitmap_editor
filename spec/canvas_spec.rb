@@ -37,6 +37,13 @@ describe Canvas do
           .to raise_error(Canvas::InvalidDimensionsError, 'Maximum canvas size exceeded')
       end
     end
+
+    context 'is created with a default colour' do
+      it 'should be O (white)' do
+        canvas = Canvas.new
+        expect(canvas.data[0][0]).to eq 'O'
+      end
+    end
   end
 
   context '#fill_colour' do
@@ -44,10 +51,10 @@ describe Canvas do
 
     it 'with pixel in bounds' do
       canvas.fill_colour(2, 2, 'M')
-      expect(canvas.data).to eq [['', ''], ['', 'M']]
+      expect(canvas.data).to eq [['O', 'O'], ['O', 'M']]
 
       canvas.fill_colour(1, 1, 'Q')
-      expect(canvas.data).to eq [['Q', ''], ['', 'M']]
+      expect(canvas.data).to eq [['Q', 'O'], ['O', 'M']]
     end
 
     it 'with pixel out of bounds' do
