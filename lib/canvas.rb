@@ -44,6 +44,9 @@ class Canvas
     @data[x.to_i-1][y.to_i-1] = colour
   end
 
+  def fill_vertical(column, row_start, row_end, colour)
+  end
+
   private
 
   def validate_dimensions

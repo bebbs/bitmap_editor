@@ -1,7 +1,12 @@
 require 'commands/base'
 
 describe 'Commands' do
-  let(:canvas) { instance_double('Canvas', :fill_colour => true, :clear => true, :show => true) }
+  let(:canvas) { instance_double('Canvas', 
+    :fill_colour => true, 
+    :fill_vertical => true,
+    :clear => true, 
+    :show => true)
+  }
 
   context 'validates show' do
     it 'too many arguments' do
@@ -118,6 +123,12 @@ describe 'Commands' do
     it 'when canvas exists' do
       cmd = Commands::Vertical.new('V 1 2 3 C', canvas)
       expect { cmd.call }.not_to raise_error
+    end
+
+    it 'sends vertical command to canvas' do
+      cmd = Commands::Vertical.new('V 1 2 3 C', canvas)
+      cmd.call
+      expect(canvas).to have_received(:fill_vertical)
     end
   end
 
