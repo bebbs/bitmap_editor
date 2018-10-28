@@ -88,4 +88,12 @@ describe Canvas do
       expect(canvas.data).to eq [['S', 'O'], ['S', 'O']]
     end
   end
+
+  context '#fill_horizontal' do
+    let(:canvas) { Canvas.new(width: 2, height: 2) }
+    it 'fills a single row with a colour' do
+      canvas.fill_horizontal(1, 2, 2, 'Q')
+      expect(canvas.data).to eq [['O', 'O'], ['Q', 'Q']]
+    end
+  end
 end

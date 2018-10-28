@@ -51,6 +51,9 @@ class Canvas
   end
 
   def fill_horizontal(column_start, column_end, row, colour)
+    (column_start..column_end).each do |column|
+      fill_colour(row, column, colour)
+    end
   end
 
   private
