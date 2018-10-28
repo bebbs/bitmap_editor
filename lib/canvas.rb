@@ -25,6 +25,9 @@ class Canvas
     @data.length
   end
 
+  def fill_colour(x, y, colour)
+  end
+
   private
 
   def validate_dimensions

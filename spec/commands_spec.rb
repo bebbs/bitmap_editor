@@ -1,7 +1,7 @@
 require 'commands/base'
 
 describe 'Commands' do
-  let(:canvas) { double(:canvas) }
+  let(:canvas) { instance_double('Canvas', :fill_colour => true) }
 
   context 'validates show' do
     it 'too many arguments' do
@@ -15,7 +15,7 @@ describe 'Commands' do
     end
 
     it 'when canvas exists' do
-      cmd = Commands::Show.new('S', :canvas)
+      cmd = Commands::Show.new('S', canvas)
       expect { cmd.call }.not_to raise_error
     end
   end
@@ -75,9 +75,10 @@ describe 'Commands' do
       expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
     end
 
-    it 'when canvas exists' do
-      cmd = Commands::Fill.new('L 1 2 M', :canvas)
-      expect { cmd.call }.not_to raise_error
+    it 'sends fill_colour command to canvas' do
+      cmd = Commands::Fill.new('L 1 2 M', canvas)
+      cmd.call
+      expect(canvas).to have_received(:fill_colour)
     end
   end
 
@@ -103,7 +104,7 @@ describe 'Commands' do
     end
 
     it 'when canvas exists' do
-      cmd = Commands::Vertical.new('V 1 2 3 C', :canvas)
+      cmd = Commands::Vertical.new('V 1 2 3 C', canvas)
       expect { cmd.call }.not_to raise_error
     end
   end
@@ -130,7 +131,7 @@ describe 'Commands' do
     end
 
     it 'when canvas exists' do
-      cmd = Commands::Horizontal.new('H 1 2 3 C', :canvas)
+      cmd = Commands::Horizontal.new('H 1 2 3 C', canvas)
       expect { cmd.call }.not_to raise_error
     end
   end
