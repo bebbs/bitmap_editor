@@ -32,5 +32,8 @@ class BitmapEditor
         raise Commands::InvalidCommandError, 'Command not recognised'
       end
     end
+
+  rescue => e
+    warn(e)
   end
 end

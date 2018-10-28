@@ -18,7 +18,7 @@ describe BitmapEditor do
 
     context 'with an invalid file' do
       let(:content) { 'bad_content' }
-      it { expect { subject }.to raise_error 'Command not recognised' }
+      it { expect { subject }.to output(/Command not recognised/).to_stderr }
     end
   end
 end
