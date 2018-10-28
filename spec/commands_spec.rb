@@ -1,10 +1,22 @@
 require 'commands/base'
 
 describe 'Commands' do
+  let(:canvas) { double(:canvas) }
+
   context 'validates show' do
     it 'too many arguments' do
       cmd = Commands::Show.new('S 1', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'when canvas does not exist' do
+      cmd = Commands::Show.new('S', nil)
+      expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
+    end
+
+    it 'when canvas exists' do
+      cmd = Commands::Show.new('S', :canvas)
+      expect { cmd.call }.not_to raise_error
     end
   end
 
@@ -12,6 +24,16 @@ describe 'Commands' do
     it 'too many arguments' do
       cmd = Commands::Clear.new('C 1', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'when canvas does not exist' do
+      cmd = Commands::Clear.new('C', nil)
+      expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
+    end
+
+    it 'when canvas exists' do
+      cmd = Commands::Clear.new('C', :canvas)
+      expect { cmd.call }.not_to raise_error
     end
   end
 
@@ -47,6 +69,16 @@ describe 'Commands' do
       cmd = Commands::Fill.new('L A B M', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
+
+    it 'when canvas does not exist' do
+      cmd = Commands::Fill.new('L 1 2 M', nil)
+      expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
+    end
+
+    it 'when canvas exists' do
+      cmd = Commands::Fill.new('L 1 2 M', :canvas)
+      expect { cmd.call }.not_to raise_error
+    end
   end
 
   context 'validates vertical' do
@@ -64,6 +96,16 @@ describe 'Commands' do
       cmd = Commands::Vertical.new('V X Y Z C', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
+
+    it 'when canvas does not exist' do
+      cmd = Commands::Vertical.new('V 1 2 3 C', nil)
+      expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
+    end
+
+    it 'when canvas exists' do
+      cmd = Commands::Vertical.new('V 1 2 3 C', :canvas)
+      expect { cmd.call }.not_to raise_error
+    end
   end
 
   context 'validates horizontal' do
@@ -80,6 +122,16 @@ describe 'Commands' do
     it 'coordinates must be integers' do
       cmd = Commands::Horizontal.new('H X Y Z C', nil)
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
+    end
+
+    it 'when canvas does not exist' do
+      cmd = Commands::Horizontal.new('H 1 2 3 C', nil)
+      expect { cmd.call }.to raise_error(Commands::NilCanvasError, 'Command must be called after creating a canvas')
+    end
+
+    it 'when canvas exists' do
+      cmd = Commands::Horizontal.new('H 1 2 3 C', :canvas)
+      expect { cmd.call }.not_to raise_error
     end
   end
 end

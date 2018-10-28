@@ -4,6 +4,9 @@ module Commands
   class InvalidCommandError < StandardError
   end
 
+  class NilCanvasError < StandardError
+  end
+
   class Base
     def initialize(line, canvas)
       @line = line
@@ -18,23 +21,23 @@ module Commands
 
     protected
 
-    def validate(arg_count:)
-      raise_error 'Invalid number of arguments' unless arguments.length == arg_count
-    end
-
     def arguments
       @line.split(' ').drop(1)
     end
 
+    def validate(arg_count:)
+      raise InvalidCommandError, 'Invalid number of arguments' unless arguments.length == arg_count
+    end
+
     def validate_integers *coords
-        coords.each {|x| raise_error 'Coordinates must be integers' unless x.is_i? }
+        coords.each {|x| raise InvalidCommandError, 'Coordinates must be integers' unless x.is_i? }
+    end
+
+    def validate_canvas_exists
+      raise NilCanvasError, 'Command must be called after creating a canvas' if @canvas.nil?
     end
 
     def perform_action
-    end
-
-    def raise_error message
-      raise InvalidCommandError, message
     end
   end
 end
