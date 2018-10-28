@@ -35,6 +35,9 @@ class Canvas
     create_image
   end
 
+  def show
+  end
+
   def fill_colour(x, y, colour)
     validate_in_bounds(x, y)
     @data[x.to_i-1][y.to_i-1] = colour
