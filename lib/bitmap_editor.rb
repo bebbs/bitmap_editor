@@ -1,11 +1,11 @@
-require 'canvas'
-require 'commands/base'
-require 'commands/show'
-require 'commands/clear'
-require 'commands/create'
-require 'commands/fill'
-require 'commands/vertical'
-require 'commands/horizontal'
+require_relative 'canvas'
+require_relative 'commands/base'
+require_relative 'commands/show'
+require_relative 'commands/clear'
+require_relative 'commands/create'
+require_relative 'commands/fill'
+require_relative 'commands/vertical'
+require_relative 'commands/horizontal'
 
 class BitmapEditor
   attr_reader :canvas

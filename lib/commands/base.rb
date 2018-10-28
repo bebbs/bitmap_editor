@@ -1,4 +1,4 @@
-require 'ext/string'
+require_relative '../ext/string'
 
 module Commands
   class InvalidCommandError < StandardError
