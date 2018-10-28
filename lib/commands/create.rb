@@ -6,7 +6,7 @@ module Commands
     end
 
     def perform_action
-      Canvas.new(width: arguments[0], height: arguments[1])
+      @canvas = Canvas.new(width: arguments[0], height: arguments[1])
     end
   end
 end
