@@ -49,5 +49,9 @@ describe Canvas do
       canvas.fill_colour(1, 1, 'Q')
       expect(canvas.data).to eq [['Q', ''], ['', 'M']]
     end
+
+    it 'with pixel out of bounds' do
+      expect { canvas.fill_colour(10, 10, 'M') }.to raise_error Canvas::OutOfBoundsError
+    end
   end
 end

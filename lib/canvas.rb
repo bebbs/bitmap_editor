@@ -2,6 +2,9 @@ class Canvas
   class InvalidDimensionsError < StandardError
   end
 
+  class OutOfBoundsError < StandardError
+  end
+
   DEFAULT_SIZE = 1
   MAXIMUM_SIZE = 250
 
@@ -17,7 +20,6 @@ class Canvas
   def create_image
     row = proc { Array.new(@width, "") }
     @data = Array.new(@height) { row.call }
-
   end
 
   def width
@@ -29,6 +31,7 @@ class Canvas
   end
 
   def fill_colour(x, y, colour)
+    validate_in_bounds(x, y)
     @data[x.to_i-1][y.to_i-1] = colour
   end
 
@@ -41,17 +44,25 @@ class Canvas
 
   def validate_minimum_dimensions
     if @width <= 0 || @height <= 0
-      raise_error 'Dimensions must be above 0'
+      raise_dimensions_error 'Dimensions must be above 0'
     end
   end
 
   def validate_maximum_dimensions
     if @width > MAXIMUM_SIZE || @height > MAXIMUM_SIZE
-      raise_error 'Maximum canvas size exceeded'
+      raise_dimensions_error 'Maximum canvas size exceeded'
     end
   end
 
-  def raise_error message
+  def raise_dimensions_error message
     raise InvalidDimensionsError, message
+  end
+
+  def validate_in_bounds(x, y)
+    raise OutOfBoundsError, 'No pixel found' unless within_range(x, 1, width) && within_range(y, 1, height)
+  end
+
+  def within_range(n, min, max)
+    n.to_i.between?(min, max)
   end
 end
