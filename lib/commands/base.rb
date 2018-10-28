@@ -19,7 +19,7 @@ module Commands
     protected
 
     def validate(arg_count:)
-      raise InvalidCommandError, 'Invalid number of arguments' unless arguments.length == arg_count
+      raise_error 'Invalid number of arguments' unless arguments.length == arg_count
     end
 
     def arguments
@@ -27,10 +27,14 @@ module Commands
     end
 
     def validate_integers *coords
-        coords.each {|x| raise InvalidCommandError, 'Coordinates must be integers' unless x.is_i? }
+        coords.each {|x| raise_error 'Coordinates must be integers' unless x.is_i? }
     end
 
     def perform_action
+    end
+
+    def raise_error message
+      raise InvalidCommandError, message
     end
   end
 end
