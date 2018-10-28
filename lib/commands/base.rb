@@ -21,14 +21,8 @@ module Commands
       @line.split(' ').drop(1)
     end
 
-    def validate_coordinates
-      if !coordinates_are_integers
-        raise InvalidCommandError, 'Coordinates must be integers'
-      end
-    end
-
-    def coordinates_are_integers
-      arguments[0].is_i? && arguments[1].is_i?
+    def validate_integers *coords
+        coords.each {|x| raise InvalidCommandError, 'Coordinates must be integers' unless x.is_i? }
     end
   end
 end

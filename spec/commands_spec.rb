@@ -51,25 +51,35 @@ describe 'Commands' do
 
   context 'validates vertical' do
     it 'too few arguments' do
-      cmd = Commands::Vertical.new('V X')
+      cmd = Commands::Vertical.new('V 1')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
     it 'too many arguments' do
-      cmd = Commands::Vertical.new('V X Y1 Y2 C A')
+      cmd = Commands::Vertical.new('V 1 1 2 C A')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'coordinates must be integers' do
+      cmd = Commands::Vertical.new('V X Y Z C')
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
   end
 
   context 'validates horizontal' do
     it 'too few arguments' do
-      cmd = Commands::Vertical.new('H X1 X2')
+      cmd = Commands::Vertical.new('H 1 2')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
     it 'too many arguments' do
-      cmd = Commands::Vertical.new('H X Y1 Y2 Y3 C A')
+      cmd = Commands::Vertical.new('H 1 2 3 4 C A')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'coordinates must be integers' do
+      cmd = Commands::Horizontal.new('H X Y Z C')
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
   end
 end
