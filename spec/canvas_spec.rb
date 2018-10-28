@@ -31,6 +31,11 @@ describe Canvas do
         expect { Canvas.new(width: 0, height: 0) }
           .to raise_error(Canvas::InvalidDimensionsError, 'Dimensions must be above 0')
       end
+
+      it 'rejects dimensions above the maximum' do
+        expect { Canvas.new(width: 251, height: 251) }
+          .to raise_error(Canvas::InvalidDimensionsError, 'Maximum canvas size exceeded')
+      end
     end
   end
 end

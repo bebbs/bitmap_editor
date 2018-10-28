@@ -3,6 +3,7 @@ class Canvas
   end
 
   DEFAULT_SIZE = 1
+  MAXIMUM_SIZE = 250
 
   def initialize(width: DEFAULT_SIZE, height: DEFAULT_SIZE)
     @width = width.to_i
@@ -27,8 +28,23 @@ class Canvas
   private
 
   def validate_dimensions
+    validate_minimum_dimensions
+    validate_maximum_dimensions
+  end
+
+  def validate_minimum_dimensions
     if @width <= 0 || @height <= 0
-      raise InvalidDimensionsError, 'Dimensions must be above 0'
+      raise_error 'Dimensions must be above 0'
     end
+  end
+
+  def validate_maximum_dimensions
+    if @width > MAXIMUM_SIZE || @height > MAXIMUM_SIZE
+      raise_error 'Maximum canvas size exceeded'
+    end
+  end
+
+  def raise_error message
+    raise InvalidDimensionsError, message
   end
 end
