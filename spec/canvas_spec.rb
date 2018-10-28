@@ -61,4 +61,14 @@ describe Canvas do
       expect { canvas.fill_colour(10, 10, 'M') }.to raise_error Canvas::OutOfBoundsError
     end
   end
+
+  context '#clear' do
+    let(:canvas) { Canvas.new(width: 2, height: 2) }
+
+    it 'resets canvas to default values' do
+      canvas.fill_colour(1, 1, 'B')
+      canvas.clear
+      expect(canvas.data).to eq [['O', 'O'], ['O', 'O']]
+    end
+  end
 end

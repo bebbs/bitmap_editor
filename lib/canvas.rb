@@ -32,6 +32,7 @@ class Canvas
   end
 
   def clear
+    create_image
   end
 
   def fill_colour(x, y, colour)
