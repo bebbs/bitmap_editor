@@ -13,8 +13,9 @@ class Canvas
   end
 
   def create_image
-    row = Array.new(@width, "")
-    @data = Array.new(@height, row)
+    row = proc { Array.new(@width, "") }
+    @data = Array.new(@height) { row.call }
+
   end
 
   def width
