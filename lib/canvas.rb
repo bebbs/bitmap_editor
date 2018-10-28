@@ -50,6 +50,9 @@ class Canvas
     end
   end
 
+  def fill_horizontal(column_start, column_end, row, colour)
+  end
+
   private
 
   def validate_dimensions

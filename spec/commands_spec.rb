@@ -3,6 +3,7 @@ require 'commands/base'
 describe 'Commands' do
   let(:canvas) { instance_double('Canvas', 
     :fill_colour => true, 
+    :fill_horizontal => true,
     :fill_vertical => true,
     :clear => true, 
     :show => true)
@@ -156,6 +157,12 @@ describe 'Commands' do
     it 'when canvas exists' do
       cmd = Commands::Horizontal.new('H 1 2 3 C', canvas)
       expect { cmd.call }.not_to raise_error
+    end
+
+    it 'sends horizontal command to canvas' do
+      cmd = Commands::Horizontal.new('H 1 2 3 C', canvas)
+      cmd.call
+      expect(canvas).to have_received(:fill_horizontal)
     end
   end
 end
