@@ -1,4 +1,8 @@
 describe Canvas do
+  width = 2
+  height = 2
+  let(:canvas) { described_class.new(width: width, height: height) }
+
   context '#new' do
     context 'with no given dimensions' do
       it 'uses the default dimensions' do
@@ -8,16 +12,14 @@ describe Canvas do
     end
 
     context 'with valid dimensions' do
-      width = 10
-      height = 9
       canvas = Canvas.new(width: width, height: height)
   
       it 'sets a width' do
-        expect(canvas.width).to eq 10
+        expect(canvas.width).to eq width
       end
   
       it 'sets a height' do
-        expect(canvas.height).to eq 9
+        expect(canvas.height).to eq height
       end
     end
     
@@ -47,8 +49,6 @@ describe Canvas do
   end
 
   context '#fill_colour' do
-    let(:canvas) { Canvas.new(width: 2, height: 2) }
-
     it 'with pixel in bounds' do
       canvas.fill_colour(2, 2, 'M')
       expect(canvas.data).to eq [['O', 'O'], ['O', 'M']]
@@ -63,8 +63,6 @@ describe Canvas do
   end
 
   context '#clear' do
-    let(:canvas) { Canvas.new(width: 2, height: 2) }
-
     it 'resets canvas to default values' do
       canvas.fill_colour(1, 1, 'B')
       canvas.clear
@@ -73,16 +71,12 @@ describe Canvas do
   end
 
   context '#show' do
-    let(:canvas) { Canvas.new(width: 2, height: 2) }
-
     it 'renders contents of canvas' do
       expect { canvas.show }.to output("OO\nOO\n").to_stdout
     end
   end
 
   context '#fill_vertical' do
-    let(:canvas) { Canvas.new(width: 2, height: 2) }
-
     it 'fills a single column with a colour' do
       canvas.fill_vertical(1, 1, 2, 'S')
       expect(canvas.data).to eq [['S', 'O'], ['S', 'O']]
@@ -90,7 +84,6 @@ describe Canvas do
   end
 
   context '#fill_horizontal' do
-    let(:canvas) { Canvas.new(width: 2, height: 2) }
     it 'fills a single row with a colour' do
       canvas.fill_horizontal(1, 2, 2, 'Q')
       expect(canvas.data).to eq [['O', 'O'], ['Q', 'Q']]
