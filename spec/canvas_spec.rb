@@ -20,5 +20,17 @@ describe Canvas do
         expect(canvas.height).to eq 9
       end
     end
+    
+    context 'with invalid dimensions' do
+      it 'rejects negative dimensions' do
+        expect { Canvas.new(width: -3, height: -7) }
+          .to raise_error(Canvas::InvalidDimensionsError, 'Dimensions must be above 0')
+      end
+
+      it 'rejects zero dimensions' do
+        expect { Canvas.new(width: 0, height: 0) }
+          .to raise_error(Canvas::InvalidDimensionsError, 'Dimensions must be above 0')
+      end
+    end
   end
 end
