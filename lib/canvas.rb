@@ -5,6 +5,8 @@ class Canvas
   DEFAULT_SIZE = 1
   MAXIMUM_SIZE = 250
 
+  attr_reader :data
+
   def initialize(width: DEFAULT_SIZE, height: DEFAULT_SIZE)
     @width = width.to_i
     @height = height.to_i
@@ -27,6 +29,7 @@ class Canvas
   end
 
   def fill_colour(x, y, colour)
+    @data[x.to_i-1][y.to_i-1] = colour
   end
 
   private

@@ -38,4 +38,16 @@ describe Canvas do
       end
     end
   end
+
+  context '#fill_colour' do
+    let(:canvas) { Canvas.new(width: 2, height: 2) }
+
+    it 'with pixel in bounds' do
+      canvas.fill_colour(2, 2, 'M')
+      expect(canvas.data).to eq [['', ''], ['', 'M']]
+
+      canvas.fill_colour(1, 1, 'Q')
+      expect(canvas.data).to eq [['Q', ''], ['', 'M']]
+    end
+  end
 end
