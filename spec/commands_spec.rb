@@ -34,13 +34,18 @@ describe 'Commands' do
 
   context 'validates fill' do
     it 'too few arguments' do
-      cmd = Commands::Fill.new('L X Y')
+      cmd = Commands::Fill.new('L 1 2')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
     end
 
     it 'too many arguments' do
-      cmd = Commands::Fill.new('L X Y C A')
+      cmd = Commands::Fill.new('L 1 2 C A')
       expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Invalid number of arguments')
+    end
+
+    it 'coordinates must be integers' do
+      cmd = Commands::Fill.new('L A B M')
+      expect { cmd.call }.to raise_error(Commands::InvalidCommandError, 'Coordinates must be integers')
     end
   end
 
