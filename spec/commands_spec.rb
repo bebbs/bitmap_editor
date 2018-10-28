@@ -1,7 +1,7 @@
 require 'commands/base'
 
 describe 'Commands' do
-  let(:canvas) { instance_double('Canvas', :fill_colour => true) }
+  let(:canvas) { instance_double('Canvas', :fill_colour => true, :clear => true) }
 
   context 'validates show' do
     it 'too many arguments' do
@@ -32,8 +32,14 @@ describe 'Commands' do
     end
 
     it 'when canvas exists' do
-      cmd = Commands::Clear.new('C', :canvas)
+      cmd = Commands::Clear.new('C', canvas)
       expect { cmd.call }.not_to raise_error
+    end
+
+    it 'sends clear command to canvas' do
+      cmd = Commands::Clear.new('C', canvas)
+      cmd.call
+      expect(canvas).to have_received(:clear)
     end
   end
 

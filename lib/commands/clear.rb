@@ -4,5 +4,9 @@ module Commands
       super(arg_count: 0)
       validate_canvas_exists
     end
+
+    def perform_action
+      @canvas.clear
+    end
   end
 end
