@@ -1,5 +1,3 @@
-
-
 describe 'Example files' do
   context 'Valid files' do
     it 'clear.txt' do
