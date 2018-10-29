@@ -16,5 +16,10 @@ describe 'Example files' do
       expect { BitmapEditor.new.run('examples/simple_fill.txt') }
         .to output("CO\nOO\n").to_stdout
     end
+
+    it 'complex.txt' do
+      expect { BitmapEditor.new.run('examples/complex.txt') }
+        .to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
+    end
   end
 end

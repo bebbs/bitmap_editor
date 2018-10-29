@@ -41,22 +41,26 @@ class Canvas
 
   def fill_colour(x, y, colour)
     validate_in_bounds(x, y)
-    @data[x.to_i-1][y.to_i-1] = colour
+    @data[y.to_i-1][x.to_i-1] = colour
   end
 
   def fill_vertical(column, row_start, row_end, colour)
-    (row_start..row_end).each do |row|
-      fill_colour(row, column, colour)
+    sorted_range(row_start, row_end).each do |row|
+      fill_colour(column, row, colour)
     end
   end
 
   def fill_horizontal(column_start, column_end, row, colour)
-    (column_start..column_end).each do |column|
-      fill_colour(row, column, colour)
+    sorted_range(column_start, column_end).each do |column|
+      fill_colour(column, row, colour)
     end
   end
 
   private
+
+  def sorted_range(a, b)
+    Range.new(*[a,b].sort)
+  end
 
   def validate_dimensions
     validate_minimum_dimensions
@@ -80,6 +84,9 @@ class Canvas
   end
 
   def validate_in_bounds(x, y)
+    if !within_range(x, 1, width) || !within_range(y, 1, height)
+      puts "#{x}, #{y} - not in range #{width} #{height}"
+    end
     raise OutOfBoundsError, 'No pixel found' unless within_range(x, 1, width) && within_range(y, 1, height)
   end
 

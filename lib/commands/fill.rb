@@ -8,10 +8,10 @@ module Commands
     end
 
     def perform_action
-      x = arguments[0].to_i
-      y = arguments[1].to_i
+      column = arguments[0].to_i
+      row = arguments[1].to_i
       colour = arguments[2]
-      @canvas.fill_colour x, y, colour
+      @canvas.fill_colour column, row, colour
     end
   end
 end
