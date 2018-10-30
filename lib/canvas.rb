@@ -84,9 +84,6 @@ class Canvas
   end
 
   def validate_in_bounds(x, y)
-    if !within_range(x, 1, width) || !within_range(y, 1, height)
-      puts "#{x}, #{y} - not in range #{width} #{height}"
-    end
     raise OutOfBoundsError, 'No pixel found' unless within_range(x, 1, width) && within_range(y, 1, height)
   end
 
