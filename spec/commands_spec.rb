@@ -29,7 +29,7 @@ def test_canvas_exists(command)
 end
 
 def test_canvas_method_sent(command, method)
-  it 'sends show command to canvas' do
+  it "sends #{method.to_s} command to canvas" do
     cmd = described_class.new(command, canvas)
     cmd.call
     expect(canvas).to have_received(method)
